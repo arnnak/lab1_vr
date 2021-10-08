@@ -1,29 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Geometry/table.glb" type="PackedScene" id=1]
+[ext_resource path="res://Geometry/table/table.glb" type="PackedScene" id=1]
 [ext_resource path="res://chair.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Geometry/room.glb" type="PackedScene" id=3]
+[ext_resource path="res://Geometry/room/room.glb" type="PackedScene" id=3]
+[ext_resource path="res://Geometry/sofa/sofa.glb" type="PackedScene" id=4]
+[ext_resource path="res://Geometry/coffe table/coffe.glb" type="PackedScene" id=5]
+[ext_resource path="res://Geometry/TV/TV.glb" type="PackedScene" id=6]
+[ext_resource path="res://Geometry/armchair/armchair.glb" type="PackedScene" id=7]
+[ext_resource path="res://lamp.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Geometry/carpet/carpet.glb" type="PackedScene" id=9]
+[ext_resource path="res://Geometry/potted plant/potted_plant.glb" type="PackedScene" id=10]
 
 [node name="Spatial" type="Spatial"]
-
-[node name="table" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, -0.677528, 1.64339, 0 )
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.4855, 0 )
-omni_range = 13.0709
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.34902, 10.4855, 2.49562 )
+light_energy = 4.27
+omni_range = 201.5
 
 [node name="chair" parent="." instance=ExtResource( 2 )]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, -2.1527, 0, -2.07085 )
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 3.00501, 0, 5.19311 )
 
 [node name="chair2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0.663027, 0, -2.08991 )
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 5.82073, 0, 5.17405 )
 
 [node name="chair3" parent="." instance=ExtResource( 2 )]
-transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, -2.11264, 0, 2.09571 )
+transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 3.04507, 0, 9.35967 )
 
 [node name="chair4" parent="." instance=ExtResource( 2 )]
-transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 0.779877, 0, 2.09019 )
+transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 5.93758, 0, 9.35415 )
 
 [node name="room" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0 )
+transform = Transform( 0.04, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 3.47115, 0, 0 )
+
+[node name="table" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 4.51972, 1.98496, 7.26396 )
+
+[node name="sofa" parent="." instance=ExtResource( 4 )]
+transform = Transform( -0.07, 0, -7.54979e-09, 0, 0.05, 0, 1.05697e-08, 0, -0.05, 3.71022, 0, -1.88549 )
+
+[node name="coffe" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 2, 0, 0, 0, 3, 3.70243, 0.507969, -7.7683 )
+
+[node name="TV" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 2.0862, 0, -14.5461 )
+
+[node name="armchair" parent="." instance=ExtResource( 7 )]
+transform = Transform( 3.57746e-09, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.57746e-09, 8.90262, 0, -7.842 )
+
+[node name="lamp" parent="." instance=ExtResource( 8 )]
+transform = Transform( 0.0281685, 0, -0.0103216, 0, 0.04, 0, 0.0103216, 0, 0.0281685, 10.3512, 0, -12.4821 )
+
+[node name="carpet" parent="." instance=ExtResource( 9 )]
+transform = Transform( 0.04, 0, 0, 0, 0.05, 0, 0, 0, 0.04, 3.79643, 0, -8.00489 )
+
+[node name="potted_plant" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -2.73532, 0, 13.5882 )
+
+[node name="potted_plant2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 11.0998, 0, 13.6323 )
