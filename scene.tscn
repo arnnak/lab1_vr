@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Geometry/table/table.glb" type="PackedScene" id=1]
 [ext_resource path="res://chair.tscn" type="PackedScene" id=2]
@@ -9,15 +9,42 @@
 [ext_resource path="res://Geometry/armchair/armchair.glb" type="PackedScene" id=7]
 [ext_resource path="res://lamp.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Geometry/carpet/carpet.glb" type="PackedScene" id=9]
-[ext_resource path="res://Geometry/potted plant/potted_plant.glb" type="PackedScene" id=10]
+[ext_resource path="res://potted_plant.tscn" type="PackedScene" id=10]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 265, 1, 330 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2, 1.2, 1.2 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 62, 21, 30 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.63, 0.23, 0.63 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 750, 560, 175 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 5, 4.3, 4.2 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 20, 90, 78 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 75, 1, 100 )
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 
+[node name="potted_plant2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 11, 0, 14 )
+
 [node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.34902, 10.4855, 2.49562 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.34902, 10.4855, 0.858202 )
 light_energy = 4.27
-omni_range = 201.5
+omni_range = 288.258
 
 [node name="chair" parent="." instance=ExtResource( 2 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 3.00501, 0, 5.19311 )
@@ -34,29 +61,62 @@ transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 5.93758
 [node name="room" parent="." instance=ExtResource( 3 )]
 transform = Transform( 0.04, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 3.47115, 0, 0 )
 
+[node name="StaticBody" type="StaticBody" parent="room"]
+
+[node name="CollisionShape" type="CollisionShape" parent="room/StaticBody"]
+shape = SubResource( 1 )
+
 [node name="table" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 4.51972, 1.98496, 7.26396 )
 
+[node name="CollisionShape" type="CollisionShape" parent="table"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
+shape = SubResource( 2 )
+
 [node name="sofa" parent="." instance=ExtResource( 4 )]
-transform = Transform( -0.07, 0, -7.54979e-09, 0, 0.05, 0, 1.05697e-08, 0, -0.05, 3.71022, 0, -1.88549 )
+transform = Transform( -0.07, 0, -7.54979e-09, 0, 0.05, 0, 1.05697e-08, 0, -0.05, 3.71, 0, -2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="sofa"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0 )
+shape = SubResource( 3 )
 
 [node name="coffe" parent="." instance=ExtResource( 5 )]
 transform = Transform( 3, 0, 0, 0, 2, 0, 0, 0, 3, 3.70243, 0.507969, -7.7683 )
 
+[node name="CollisionShape" type="CollisionShape" parent="coffe"]
+shape = SubResource( 5 )
+
 [node name="TV" parent="." instance=ExtResource( 6 )]
 transform = Transform( 0.005, 0, 0, 0, 0.005, 0, 0, 0, 0.005, 2.0862, 0, -14.5461 )
+
+[node name="CollisionShape" type="CollisionShape" parent="TV"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 310, 560, 275 )
+shape = SubResource( 6 )
 
 [node name="armchair" parent="." instance=ExtResource( 7 )]
 transform = Transform( 3.57746e-09, 0, -0.3, 0, 0.3, 0, 0.3, 0, 3.57746e-09, 8.90262, 0, -7.842 )
 
+[node name="CollisionShape" type="CollisionShape" parent="armchair"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3, -0.8 )
+shape = SubResource( 7 )
+
 [node name="lamp" parent="." instance=ExtResource( 8 )]
 transform = Transform( 0.0281685, 0, -0.0103216, 0, 0.04, 0, 0.0103216, 0, 0.0281685, 10.3512, 0, -12.4821 )
+
+[node name="CollisionShape" type="CollisionShape" parent="lamp"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 90, 55 )
+shape = SubResource( 8 )
 
 [node name="carpet" parent="." instance=ExtResource( 9 )]
 transform = Transform( 0.04, 0, 0, 0, 0.05, 0, 0, 0, 0.04, 3.79643, 0, -8.00489 )
 
-[node name="potted_plant" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -2.73532, 0, 13.5882 )
+[node name="CollisionShape" type="CollisionShape" parent="carpet"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5 )
+shape = SubResource( 4 )
 
-[node name="potted_plant2" parent="." instance=ExtResource( 10 )]
-transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 11.0998, 0, 13.6323 )
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 3.42764, 5.04264, 19.1872 )
+far = 500.0
+
+[node name="potted_plant" parent="." instance=ExtResource( 10 )]
+transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -3, 0, 14 )
