@@ -63,7 +63,7 @@ func toggle_control_state(scancode):
 		controlling_left_hand = !controlling_left_hand
 	elif scancode == KEY_E:
 		controlling_right_hand = !controlling_right_hand
-	elif scancode == KEY_W:
+	elif scancode == KEY_C:
 		controlling_camera = !controlling_camera
 	elif scancode == KEY_R:
 		reset()

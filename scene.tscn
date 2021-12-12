@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Geometry/table/table.glb" type="PackedScene" id=1]
 [ext_resource path="res://chair.tscn" type="PackedScene" id=2]
@@ -11,12 +11,23 @@
 [ext_resource path="res://Geometry/carpet/carpet.glb" type="PackedScene" id=9]
 [ext_resource path="res://potted_plant.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/godot-openxr/scenes/first_person_controller_vr.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/KinematicBody.gd" type="Script" id=12]
+[ext_resource path="res://Geometry/bowl/bowl.glb" type="PackedScene" id=13]
+[ext_resource path="res://Geometry/kitchen/kitchen.glb" type="PackedScene" id=14]
+[ext_resource path="res://Geometry/cake/cake.glb" type="PackedScene" id=15]
+[ext_resource path="res://Geometry/knife/knife.glb" type="PackedScene" id=16]
+[ext_resource path="res://Geometry/powder/powder.glb" type="PackedScene" id=17]
+[ext_resource path="res://Geometry/cake_slice/cake_slice.glb" type="PackedScene" id=18]
+[ext_resource path="res://Geometry/egg/egg.glb" type="PackedScene" id=19]
+[ext_resource path="res://Geometry/spoon/spoon.glb" type="PackedScene" id=20]
+[ext_resource path="res://Geometry/bottle/bottle.glb" type="PackedScene" id=21]
+[ext_resource path="res://Geometry/flour/flour.glb" type="PackedScene" id=22]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.205, 1, 0.203119 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.2, 0.5, 0.2 )
+extents = Vector3( 0.195029, 0.466317, 0.2 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.2, 5.41577, 0.2 )
@@ -47,6 +58,46 @@ extents = Vector3( 0.030759, 8.33189, 18.615 )
 extents = Vector3( 0.204584, 1, 2.61501 )
 
 [sub_resource type="SphereShape" id=12]
+
+[sub_resource type="CapsuleShape" id=13]
+radius = 0.783289
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.203087, 0.0836228, 0.22322 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 0.206092, 0.173937, 0.253162 )
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 0.0334938, 0.213816, 0.222299 )
+
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 0.204669, 0.185702, 0.19874 )
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 0.222322, 0.193622, 0.191623 )
+
+[sub_resource type="CylinderShape" id=19]
+radius = 0.19333
+height = 0.387306
+
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 0.192111, 0.239521, 0.197843 )
+
+[sub_resource type="BoxShape" id=21]
+extents = Vector3( 0.208763, 0.207717, 0.227598 )
+
+[sub_resource type="BoxShape" id=22]
+extents = Vector3( 0.206436, 0.210006, 0.211706 )
+
+[sub_resource type="BoxShape" id=23]
+extents = Vector3( 2.69188, 0.48963, 0.214337 )
+
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 0.225045, 0.208462, 0.200141 )
+
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 0.210466, 0.210095, 0.227251 )
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
@@ -83,11 +134,12 @@ shape = SubResource( 1 )
 [node name="table" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1, 4.51972, 1.98496, 7.26396 )
 
-[node name="StaticBody" type="StaticBody" parent="table"]
-transform = Transform( 10, 0, 0, 0, 2.4, 0, 0, 0, 5.8, 0, 0.378814, 0 )
+[node name="RigidBody" type="RigidBody" parent="table"]
+transform = Transform( 10, 0, 0, 0, 2.4, 0, 0, 0, 5.8, 0, 0.379, 0 )
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="table/StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.472477, 0 )
+[node name="CollisionShape" type="CollisionShape" parent="table/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.459149, 0 )
 shape = SubResource( 2 )
 
 [node name="sofa" parent="." instance=ExtResource( 4 )]
@@ -164,11 +216,8 @@ shape = SubResource( 11 )
 [node name="potted_plant" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -3, 0, 14 )
 
-[node name="FPSController" parent="." instance=ExtResource( 11 )]
-transform = Transform( -1.09278e-07, 0, -2.5, 0, 2.5, 0, 2.5, 0, -1.09278e-07, -0.0652924, 0, 7.17003 )
-
 [node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76682, 4.09777, 7.20236 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0378534, 3.14209, 3.62225 )
 mode = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
@@ -178,3 +227,114 @@ shape = SubResource( 12 )
 [node name="CSGSphere" type="CSGSphere" parent="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177019, 0 )
 radius = 0.322407
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 12 )
+
+[node name="FPSController" parent="KinematicBody" instance=ExtResource( 11 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.0652924, 0, 7.17003 )
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 1.5, 0, 0, 0, -4.37114e-08, -1.8, 0, 1, -7.86805e-08, 0, 2.43592, 6.9804 )
+shape = SubResource( 13 )
+
+[node name="kitchen" parent="." instance=ExtResource( 14 )]
+transform = Transform( 0.00785384, 0, 3, 0, 4, 0, -4.49999, 0, 0.0052359, -7.14214, -0.0654202, -0.753767 )
+
+[node name="StaticBody" type="StaticBody" parent="kitchen"]
+transform = Transform( 14, 0, 0, 0, 5, 0, 0, 0, 1.5, -0.0696443, 0.470529, 0.288771 )
+
+[node name="CollisionShape" type="CollisionShape" parent="kitchen/StaticBody"]
+transform = Transform( 0.999998, 0, 1.01863e-10, 0, 0.999999, 0, 7.45058e-09, 0, 1, -0.000480201, 0.241786, -1.23978e-05 )
+shape = SubResource( 14 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="kitchen/StaticBody"]
+transform = Transform( 1, 0, -5.82077e-11, 0, 0.5, 0, 0, 0, 1, 0, -0.00388577, 0 )
+shape = SubResource( 15 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="kitchen/StaticBody"]
+transform = Transform( 1, 0, -1.16415e-10, 0, 1, 0, 0, 0, 1, -0.174476, 0.118578, 0.00426316 )
+shape = SubResource( 16 )
+
+[node name="bowl" parent="." instance=ExtResource( 13 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -5.81371, 3.55213, 3.58516 )
+
+[node name="RigidBody" type="RigidBody" parent="bowl"]
+transform = Transform( 0.8, 0, 0, 0, 0.3, 0, 0, 0, 0.8, 0, 0.061759, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="bowl/RigidBody"]
+shape = SubResource( 17 )
+
+[node name="bottle" parent="." instance=ExtResource( 21 )]
+transform = Transform( 0.8145, 0, 0.580163, 0, 1, 0, -0.580163, 0, 0.8145, -6.45694, 3.52415, 2.25566 )
+
+[node name="RigidBody" type="RigidBody" parent="bottle"]
+transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0.589283, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="bottle/RigidBody"]
+shape = SubResource( 18 )
+
+[node name="cake" parent="." instance=ExtResource( 15 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.08762, 3.78756, 6.48667 )
+
+[node name="RigidBody" type="RigidBody" parent="cake"]
+transform = Transform( 5, 0, 0, 0, 5.5, 0, 0, 0, 5, 0, 0.916689, 0.157148 )
+
+[node name="CollisionShape" type="CollisionShape" parent="cake/RigidBody"]
+shape = SubResource( 19 )
+
+[node name="cake_slice" parent="." instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33774, 2.41462, 7.31712 )
+
+[node name="RigidBody" type="RigidBody" parent="cake_slice"]
+transform = Transform( 2.5, 0, 0, 0, 0.9, 0, 0, 0, 2.5, 0, 0.168308, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="cake_slice/RigidBody"]
+shape = SubResource( 20 )
+
+[node name="egg" parent="." instance=ExtResource( 19 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -6.10718, 3.52939, 2.80812 )
+
+[node name="RigidBody" type="RigidBody" parent="egg"]
+transform = Transform( 0.1, 0, 0, 0, 0.15, 0, 0, 0, 0.1, 0, 0.0310065, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="egg/RigidBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0158825, 0 )
+shape = SubResource( 21 )
+
+[node name="flour" parent="." instance=ExtResource( 22 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -6.08597, 3.5366, 1.25988 )
+
+[node name="RigidBody" type="RigidBody" parent="flour"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.101584, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="flour/RigidBody"]
+shape = SubResource( 22 )
+
+[node name="knife" parent="." instance=ExtResource( 16 )]
+transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, -6.03561, 3.55532, -2.01723 )
+
+[node name="RigidBody" type="RigidBody" parent="knife"]
+transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.245165, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="knife/RigidBody"]
+shape = SubResource( 23 )
+
+[node name="powder" parent="." instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78104, 3.56056, 0.283253 )
+
+[node name="RigidBody" type="RigidBody" parent="powder"]
+transform = Transform( 1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="powder/RigidBody"]
+shape = SubResource( 24 )
+
+[node name="spoon" parent="." instance=ExtResource( 20 )]
+transform = Transform( -1.31134e-08, -0.3, 0, -1.31134e-08, 5.73206e-16, 0.3, -0.3, 1.31134e-08, -1.31134e-08, -5.73825, 3.59627, 3.01999 )
+
+[node name="RigidBody" type="RigidBody" parent="spoon"]
+transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 0.0626326, -0.0688953 )
+
+[node name="CollisionShape" type="CollisionShape" parent="spoon/RigidBody"]
+shape = SubResource( 25 )
