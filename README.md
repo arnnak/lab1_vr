@@ -35,4 +35,4 @@
 7. Nunešti dubenį į orkaitę.
 8. Nunešti iškeptą tortą ant stalo.
 9. Atsinešti peilį ir atpjauti gabaliuką torto.
-10. Padėti atpjautą gabalėlį ant stalo.
+10. Padėti atpjautą gabalėlį ant kavos staliuko.
