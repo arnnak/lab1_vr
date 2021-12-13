@@ -21,3 +21,18 @@
 18. Flour - https://www.cgtrader.com/free-3d-models/household/kitchenware/wheat-bag-aroz-flour
 19. Powder packet - https://www.cgtrader.com/free-3d-models/various/various-models/packaging-bag-3d-model-free
 20. Cake slice - https://www.cgtrader.com/free-3d-models/food/miscellaneous/slice-of-chocolate-cake
+
+
+# lab2_vr
+-------------------
+## Veiksmų seka - "torto kepimas".
+1. Pasidėti dubenį į tinkamą poziciją.
+2. Idėti miltus į dubenį.
+3. Įdėti kiaušinį į dubenį.
+4. Įpilti aliejų į dubenį.
+5. Įpilti kepimo miltelius į dubenį.
+6. Pasiimti šaukštą ir išmaišyti tešlą.
+7. Nunešti dubenį į orkaitę.
+8. Nunešti iškeptą tortą ant stalo.
+9. Atsinešti peilį ir atpjauti gabaliuką torto.
+10. Padėti atpjautą gabalėlį ant stalo.
