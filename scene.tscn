@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Geometry/table/table.glb" type="PackedScene" id=1]
 [ext_resource path="res://chair.tscn" type="PackedScene" id=2]
@@ -22,6 +22,12 @@
 [ext_resource path="res://Geometry/spoon/spoon.glb" type="PackedScene" id=20]
 [ext_resource path="res://Geometry/bottle/bottle.glb" type="PackedScene" id=21]
 [ext_resource path="res://Geometry/flour/flour.glb" type="PackedScene" id=22]
+[ext_resource path="res://Geometry/TeleportLocation.glb" type="PackedScene" id=23]
+[ext_resource path="res://scripts/TaskController.gd" type="Script" id=24]
+[ext_resource path="res://scripts/CounterPlacement.gd" type="Script" id=25]
+[ext_resource path="res://scripts/OvenPlacement.gd" type="Script" id=26]
+[ext_resource path="res://scripts/STablePlacement.gd" type="Script" id=27]
+[ext_resource path="res://scripts/FTablePlacment.gd" type="Script" id=28]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.205, 1, 0.203119 )
@@ -56,8 +62,6 @@ extents = Vector3( 0.030759, 8.33189, 18.615 )
 
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.204584, 1, 2.61501 )
-
-[sub_resource type="SphereShape" id=12]
 
 [sub_resource type="CapsuleShape" id=13]
 radius = 0.783289
@@ -96,8 +100,20 @@ extents = Vector3( 2.69188, 0.48963, 0.214337 )
 [sub_resource type="BoxShape" id=24]
 extents = Vector3( 0.225045, 0.208462, 0.200141 )
 
-[sub_resource type="BoxShape" id=25]
-extents = Vector3( 0.210466, 0.210095, 0.227251 )
+[sub_resource type="BoxShape" id=30]
+extents = Vector3( 0.336598, 0.172084, 0.364977 )
+
+[sub_resource type="BoxShape" id=26]
+extents = Vector3( 0.334943, 0.425297, 0.453592 )
+
+[sub_resource type="BoxShape" id=27]
+extents = Vector3( 0.365941, 0.388998, 0.3759 )
+
+[sub_resource type="BoxShape" id=28]
+extents = Vector3( 0.482019, 0.472931, 0.472728 )
+
+[sub_resource type="BoxShape" id=29]
+extents = Vector3( 0.448267, 0.534634, 0.480774 )
 
 [node name="Spatial" type="Spatial"]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
@@ -216,18 +232,6 @@ shape = SubResource( 11 )
 [node name="potted_plant" parent="." instance=ExtResource( 10 )]
 transform = Transform( 0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -3, 0, 14 )
 
-[node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0378534, 3.14209, 3.62225 )
-mode = 3
-
-[node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.284306, 0 )
-shape = SubResource( 12 )
-
-[node name="CSGSphere" type="CSGSphere" parent="RigidBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.177019, 0 )
-radius = 0.322407
-
 [node name="KinematicBody" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1.1, 0, 0, 0, 1, 0, 0, 0 )
 script = ExtResource( 12 )
@@ -257,84 +261,182 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, -1.16415e-10, 0, 1, 0, 0, 0, 1, -0.174476, 0.118578, 0.00426316 )
 shape = SubResource( 16 )
 
-[node name="bowl" parent="." instance=ExtResource( 13 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -5.81371, 3.55213, 3.58516 )
+[node name="bowl" type="RigidBody" parent="."]
+transform = Transform( 1.6, 0, 0, 0, 0.6, 0, 0, 0, 1.6, -5.81371, 3.67565, -0.732914 )
+mode = 3
 
-[node name="RigidBody" type="RigidBody" parent="bowl"]
-transform = Transform( 0.8, 0, 0, 0, 0.3, 0, 0, 0, 0.8, 0, 0.061759, 0 )
+[node name="bowl" parent="bowl" instance=ExtResource( 13 )]
+transform = Transform( 1.25, 0, 0, 0, 3.33333, 0, 0, 0, 1.25, 0, -0.205863, 0 )
 
-[node name="CollisionShape" type="CollisionShape" parent="bowl/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="bowl"]
 shape = SubResource( 17 )
 
-[node name="bottle" parent="." instance=ExtResource( 21 )]
-transform = Transform( 0.8145, 0, 0.580163, 0, 1, 0, -0.580163, 0, 0.8145, -6.45694, 3.52415, 2.25566 )
+[node name="bottle" type="RigidBody" parent="."]
+transform = Transform( 0.8145, 0, 0.580163, 0, 3, 0, -0.580163, 0, 0.8145, -6.45694, 4.11343, 2.25566 )
+visible = false
+mode = 3
 
-[node name="RigidBody" type="RigidBody" parent="bottle"]
-transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0.589283, 0 )
-
-[node name="CollisionShape" type="CollisionShape" parent="bottle/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="bottle"]
 shape = SubResource( 18 )
 
-[node name="cake" parent="." instance=ExtResource( 15 )]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -6.08762, 3.78756, 6.48667 )
+[node name="bottle" parent="bottle" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, -5.96046e-08, 0, 0.333333, 0, 5.96046e-08, 0, 1, 0, -0.196428, 0 )
 
-[node name="RigidBody" type="RigidBody" parent="cake"]
-transform = Transform( 5, 0, 0, 0, 5.5, 0, 0, 0, 5, 0, 0.916689, 0.157148 )
+[node name="cake" type="RigidBody" parent="."]
+transform = Transform( 2.5, 0, 0, 0, 2.75, 0, 0, 0, 2.5, -6.08762, 4.24591, 6.56524 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="cake/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="cake"]
 shape = SubResource( 19 )
 
-[node name="cake_slice" parent="." instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33774, 2.41462, 7.31712 )
+[node name="cake" parent="cake" instance=ExtResource( 15 )]
+transform = Transform( 0.2, 0, 0, 0, 0.181818, 0, 0, 0, 0.2, 0, -0.166671, -0.0314298 )
 
-[node name="RigidBody" type="RigidBody" parent="cake_slice"]
-transform = Transform( 2.5, 0, 0, 0, 0.9, 0, 0, 0, 2.5, 0, 0.168308, 0 )
+[node name="cake_slice" type="RigidBody" parent="."]
+transform = Transform( 2.5, 0, 0, 0, 0.9, 0, 0, 0, 2.5, 4.36615, 2.58293, 7.21092 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="cake_slice/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="cake_slice"]
 shape = SubResource( 20 )
 
-[node name="egg" parent="." instance=ExtResource( 19 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -6.10718, 3.52939, 2.80812 )
+[node name="cake_slice" parent="cake_slice" instance=ExtResource( 18 )]
+transform = Transform( 0.4, 0, 0, 0, 1.11111, 0, 0, 0, 0.4, 0, -0.187009, 0 )
 
-[node name="RigidBody" type="RigidBody" parent="egg"]
-transform = Transform( 0.1, 0, 0, 0, 0.15, 0, 0, 0, 0.1, 0, 0.0310065, 0 )
+[node name="egg" type="RigidBody" parent="."]
+transform = Transform( 0.2, 0, 0, 0, 0.3, 0, 0, 0, 0.2, -6.10718, 3.5914, 2.80812 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="egg/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="egg"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0158825, 0 )
 shape = SubResource( 21 )
 
-[node name="flour" parent="." instance=ExtResource( 22 )]
-transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, -6.08597, 3.5366, 1.25988 )
+[node name="egg" parent="egg" instance=ExtResource( 19 )]
+transform = Transform( 10, 0, 0, 0, 6.66667, 0, 0, 0, 10, 0, -0.20671, 0 )
 
-[node name="RigidBody" type="RigidBody" parent="flour"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.101584, 0 )
+[node name="flour" type="RigidBody" parent="."]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -6.08597, 3.94294, 1.25988 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="flour/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="flour"]
 shape = SubResource( 22 )
 
-[node name="knife" parent="." instance=ExtResource( 16 )]
-transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, -0.15, 0, 0.15, -6.55671e-09, -6.03561, 3.55532, -2.01723 )
+[node name="flour" parent="flour" instance=ExtResource( 22 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.203169, 0 )
 
-[node name="RigidBody" type="RigidBody" parent="knife"]
-transform = Transform( 1, 0, 0, 0, 1.5, 0, 0, 0, 1, 0, 0.245165, 0 )
+[node name="knife" type="RigidBody" parent="."]
+transform = Transform( 0.15, 0, 0, 0, -9.83506e-09, -0.15, 0, 0.225, -6.55671e-09, -6.03561, 3.55532, -1.98045 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="knife/RigidBody"]
+[node name="CollisionShape" type="CollisionShape" parent="knife"]
 shape = SubResource( 23 )
 
-[node name="powder" parent="." instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78104, 3.56056, 0.283253 )
+[node name="knife" parent="knife" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 0.666667, -1.77636e-15, 0, -3.55271e-15, 1, 0, -0.163444, 0 )
 
-[node name="RigidBody" type="RigidBody" parent="powder"]
-transform = Transform( 1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0, 0 )
+[node name="powder" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.2, 0, 0, 0, 1, -5.78104, 3.56056, 0.283253 )
+visible = false
+mode = 3
 
-[node name="CollisionShape" type="CollisionShape" parent="powder/RigidBody"]
+[node name="powder" parent="powder" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="powder"]
 shape = SubResource( 24 )
 
-[node name="spoon" parent="." instance=ExtResource( 20 )]
-transform = Transform( -1.31134e-08, -0.3, 0, -1.31134e-08, 5.73206e-16, 0.3, -0.3, 1.31134e-08, -1.31134e-08, -5.73825, 3.59627, 3.01999 )
+[node name="spoon" type="RigidBody" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 1.5, 0, 0, 0, 0.15, -6.68663, 3.8921, 0.92405 )
+visible = false
+mode = 3
 
-[node name="RigidBody" type="RigidBody" parent="spoon"]
-transform = Transform( 1, 0, 0, 0, 5, 0, 0, 0, 0.5, 0, 0.0626326, -0.0688953 )
+[node name="spoon2" parent="spoon" instance=ExtResource( 20 )]
+transform = Transform( -2.18557e-07, -25, -9.31764e-22, 1, -2.18557e-07, 7.10543e-15, -1.13687e-13, -3.38813e-20, 5, 0.584972, 0.0977324, 1.29912 )
 
-[node name="CollisionShape" type="CollisionShape" parent="spoon/RigidBody"]
-shape = SubResource( 25 )
+[node name="CollisionShape" type="CollisionShape" parent="spoon"]
+shape = SubResource( 30 )
+
+[node name="CounterPlacement" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.92289, 3.58893, 4.13445 )
+script = ExtResource( 25 )
+first_target_name = "bowl"
+second_target_name = "flour"
+third_target_name = "egg"
+fourth_target_name = "bottle"
+fifth_target_name = "powder"
+sixth_target_name = "spoon"
+
+[node name="CollisionShape" type="CollisionShape" parent="CounterPlacement"]
+shape = SubResource( 26 )
+
+[node name="TeleportLocation" parent="CounterPlacement" instance=ExtResource( 23 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.131097, -0.0312684, -0.0117493 )
+
+[node name="OvenPlacement" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.11554, 3.70377, 6.74719 )
+visible = false
+monitoring = false
+script = ExtResource( 26 )
+first_target_name = "bowl"
+
+[node name="CollisionShape" type="CollisionShape" parent="OvenPlacement"]
+shape = SubResource( 27 )
+
+[node name="TeleportLocation2" parent="OvenPlacement" instance=ExtResource( 23 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0642076, -0.0157511, -0.00548649 )
+
+[node name="FTablePlacment" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81372, 2.44047, 7.14915 )
+visible = false
+monitoring = false
+script = ExtResource( 28 )
+first_target_name = "cake"
+second_target_name = "knife"
+
+[node name="CollisionShape" type="CollisionShape" parent="FTablePlacment"]
+shape = SubResource( 28 )
+
+[node name="TeleportLocation3" parent="FTablePlacment" instance=ExtResource( 23 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.0409708, -0.0242071, 0.0640678 )
+
+[node name="STablePlacement" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.66836, 1.26438, -7.68631 )
+visible = false
+monitoring = false
+script = ExtResource( 27 )
+first_target_name = "cake_slice"
+
+[node name="CollisionShape" type="CollisionShape" parent="STablePlacement"]
+shape = SubResource( 29 )
+
+[node name="TeleportLocation4" parent="STablePlacement" instance=ExtResource( 23 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.0204115, -0.0723631, -0.0851769 )
+
+[node name="TaskController" type="Node" parent="."]
+script = ExtResource( 24 )
+first_area = NodePath("../CounterPlacement")
+second_area = NodePath("../OvenPlacement")
+third_area = NodePath("../FTablePlacment")
+fourth_area = NodePath("../STablePlacement")
+first_item = NodePath("../bowl")
+second_item = NodePath("../flour")
+third_item = NodePath("../egg")
+fourth_item = NodePath("../bottle")
+fifth_item = NodePath("../powder")
+sixth_item = NodePath("../spoon")
+seventh_item = NodePath("../cake")
+eighth_item = NodePath("../knife")
+ninth_item = NodePath("../cake_slice")
+
+[connection signal="action_completed" from="CounterPlacement" to="TaskController" method="_on_CounterPlacement_action_completed"]
+[connection signal="body_entered" from="CounterPlacement" to="CounterPlacement" method="_on_CounterPlacement_body_entered"]
+[connection signal="action_completed" from="OvenPlacement" to="TaskController" method="_on_OvenPlacement_action_completed"]
+[connection signal="body_entered" from="OvenPlacement" to="OvenPlacement" method="_on_OvenPlacement_body_entered"]
+[connection signal="action_completed" from="FTablePlacment" to="TaskController" method="_on_FTablePlacment_action_completed"]
+[connection signal="body_entered" from="FTablePlacment" to="FTablePlacment" method="_on_FTablePlacment_body_entered"]
+[connection signal="action_completed" from="STablePlacement" to="TaskController" method="_on_STablePlacement_action_completed"]
+[connection signal="body_entered" from="STablePlacement" to="STablePlacement" method="_on_STablePlacement_body_entered"]
